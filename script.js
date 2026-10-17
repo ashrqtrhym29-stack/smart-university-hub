@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (loginForm) {
         loginForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // منع إعادة تحميل الصفحة
+            e.preventDefault();
 
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
@@ -13,8 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 // حفظ نوع الحساب مؤقتاً
                 localStorage.setItem('userRole', role);
                 
-                // التوجيه لصفحة الداشبورد
-                window.location.href = 'dashboard.html';
+                // التوجيه الذكي بناءً على نوع الحساب
+                if (role === 'student') {
+                    window.location.href = 'dashboard.html';
+                } else if (role === 'doctor') {
+                    window.location.href = 'doctor.html';
+                } else if (role === 'admin') {
+                    alert('صفحة المسؤول قيد التطوير حالياً!');
+                }
             } else {
                 alert('يرجى ملء كافة البيانات المطلوبة');
             }
